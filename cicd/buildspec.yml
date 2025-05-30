@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - curl -O https://releases.hashicorp.com/terraform/1.5.0/terraform_1.5.0_linux_amd64.zip
+      - unzip terraform_1.5.0_linux_amd64.zip
+      - mv terraform /usr/local/bin/
+  pre_build:
+    commands:
+      - terraform init
+  build:
+    commands:
+      - terraform plan -var-file="terraform.tfvars"
+      - terraform apply -auto-approve -var-file="terraform.tfvars"
